@@ -1,0 +1,26 @@
+package com.tenantcare.backend.user.dto;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public record UserRegistrationRequest(
+        @NotBlank(message = "Email is required")
+        @Email(message = "Invalid email format")
+        String email,
+
+        @NotBlank(message = "Password is required")
+        @NotBlank(message = "Password must be at least 8 characters long")
+        String password,
+
+        @NotBlank(message = "First name is required")
+        String firstName,
+
+        @NotBlank(message = "Last name is required")
+        String lastName,
+
+        @NotBlank(message = "Role is required")
+        String role
+
+) {
+}
