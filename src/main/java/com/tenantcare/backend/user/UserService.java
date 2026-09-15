@@ -2,6 +2,7 @@ package com.tenantcare.backend.user;
 
 import com.tenantcare.backend.user.dto.UserRegistrationRequest;
 import com.tenantcare.backend.user.dto.UserResponse;
+import com.tenantcare.backend.user.exception.UserAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ public class UserService {
 
     public UserResponse registerUser(UserRegistrationRequest request) {
         if (userRepository.existsByEmail(request.email())) {
-            throw new RuntimeException("Email is already taken");
+            throw new UserAlreadyExistsException("Email is already taken");
         }
 
         User user = User.builder()
