@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 
@@ -24,7 +23,6 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<UserResponse> getCurrentUser(@AuthenticationPrincipal User user) {
         UserResponse response = new UserResponse(
                 user.getId(),
