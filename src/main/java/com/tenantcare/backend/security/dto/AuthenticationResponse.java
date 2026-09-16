@@ -1,4 +1,4 @@
-package com.tenantcare.backend.user.security.dto;
+package com.tenantcare.backend.security.dto;
 
 public record AuthenticationResponse(
         String token

@@ -1,4 +1,4 @@
-package com.tenantcare.backend.user.security;
+package com.tenantcare.backend.security;
 
 import com.tenantcare.backend.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 

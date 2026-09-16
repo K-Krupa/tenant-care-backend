@@ -1,7 +1,7 @@
-package com.tenantcare.backend.user.security;
+package com.tenantcare.backend.security;
 
-import com.tenantcare.backend.user.security.dto.AuthenticationRequest;
-import com.tenantcare.backend.user.security.dto.AuthenticationResponse;
+import com.tenantcare.backend.security.dto.AuthenticationRequest;
+import com.tenantcare.backend.security.dto.AuthenticationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
