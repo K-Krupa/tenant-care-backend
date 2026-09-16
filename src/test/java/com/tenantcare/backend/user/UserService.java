@@ -18,6 +18,9 @@ class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+
     @InjectMocks
     private UserService userService;
 
@@ -38,6 +41,7 @@ class UserServiceTest {
                 .build();
 
         when(userRepository.existsByEmail(request.email())).thenReturn(false);
+        when(passwordEncoder.encode(anyString())).thenReturn("hashedPassword123");
         when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
         // when

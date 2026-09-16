@@ -4,6 +4,7 @@ import com.tenantcare.backend.user.dto.UserRegistrationRequest;
 import com.tenantcare.backend.user.dto.UserResponse;
 import com.tenantcare.backend.user.exception.UserAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public UserResponse registerUser(UserRegistrationRequest request) {
         if (userRepository.existsByEmail(request.email())) {
@@ -19,7 +21,7 @@ public class UserService {
 
         User user = User.builder()
                 .email(request.email())
-                .password(request.password()) // TODO: This will be hashed later
+                .password(passwordEncoder.encode(request.password()))
                 .firstName(request.firstName())
                 .lastName(request.lastName())
                 .role(Role.valueOf(request.role().toUpperCase()))
