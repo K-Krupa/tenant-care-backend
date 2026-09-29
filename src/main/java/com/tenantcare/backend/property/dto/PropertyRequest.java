@@ -10,8 +10,8 @@ public record PropertyRequest(
     @NotBlank(message = "Property name is required")
     String name,
 
-    @NotBlank(message = "Adress is required")
-    String adress,
+    @NotBlank(message = "Address is required")
+    String address,
 
     @NotNull(message = "Rent amount is required")
     @Positive(message = "Rent amount must be greater than zero")

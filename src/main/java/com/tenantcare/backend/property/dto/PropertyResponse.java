@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public record PropertyResponse(
     Long id,
     String name,
-    String adress,
+    String address,
     BigDecimal rentAmount,
     Double area
 ) {

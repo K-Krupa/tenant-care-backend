@@ -18,7 +18,7 @@ public class PropertyService {
     public PropertyResponse createProperty(PropertyRequest request, User owner) {
         Property property = Property.builder()
                 .name(request.name())
-                .adress(request.adress())
+                .address(request.address())
                 .rentAmount(request.rentAmount())
                 .area(request.area())
                 .owner(owner)
@@ -39,7 +39,7 @@ public class PropertyService {
         return new PropertyResponse(
                 property.getId(),
                 property.getName(),
-                property.getAdress(),
+                property.getAddress(),
                 property.getRentAmount(),
                 property.getArea()
         );
