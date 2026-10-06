@@ -35,4 +35,23 @@ public class PropertyController {
     ) {
         return ResponseEntity.ok(propertyService.getMyProperties(owner));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PropertyResponse> updateProperty(
+            @PathVariable Long id,
+            @Valid @RequestBody PropertyRequest request,
+            @AuthenticationPrincipal User owner
+    ) {
+        PropertyResponse response = propertyService.updateProperty(id, request, owner);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProperty(
+            @PathVariable Long id,
+            @AuthenticationPrincipal User owner
+    ) {
+        propertyService.deleteProperty(id, owner);
+        return ResponseEntity.noContent().build();
+    }
 }

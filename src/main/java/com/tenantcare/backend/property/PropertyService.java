@@ -44,4 +44,24 @@ public class PropertyService {
                 property.getArea()
         );
     }
+
+    public PropertyResponse updateProperty(Long id, PropertyRequest request, User owner) {
+        Property property = propertyRepository.findByIdAndOwnerId(id, owner.getId())
+                .orElseThrow(() -> new RuntimeException("Property not found access denied"));
+
+        property.setName(request.name());
+        property.setAddress(request.address());
+        property.setRentAmount(request.rentAmount());
+        property.setArea(request.area());
+
+        Property updatedProperty = propertyRepository.save(property);
+        return mapToResponse(updatedProperty);
+    }
+
+    public void deleteProperty(Long id, User owner) {
+        Property property = propertyRepository.findByIdAndOwnerId(id, owner.getId())
+                .orElseThrow(() -> new RuntimeException("Property not found or acces denied"));
+        propertyRepository.delete(property);
+    }
+
 }
