@@ -34,4 +34,7 @@ public class Property {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
+
+    @OneToOne(mappedBy ="property", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private com.tenantcare.backend.tenant.Tenant tenant;
 }
