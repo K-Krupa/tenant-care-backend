@@ -41,6 +41,34 @@ public class TenantService {
         return mapToResponse(savedTenant);
     }
 
+    @Transactional (readOnly = true)
+    public TenantResponse getTenantById(Long id, User currentUser) {
+        Tenant tenant = tenantRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Tenant not found"));
+        if (!tenant.getProperty().getOwner().getId().equals(currentUser.getId())) {
+            throw new IllegalArgumentException("Access denied: You do not own this property");
+        }
+
+        return mapToResponse(tenant);
+    }
+
+    @Transactional
+    public void deleteTenant(Long id, User currentUser) {
+        Tenant tenant = tenantRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Tenant not found"));
+
+        if (!tenant.getProperty().getOwner().getId().equals(currentUser.getId())) {
+            throw new IllegalArgumentException("Access denied: You do not own this property");
+        }
+
+        Property property = tenant.getProperty();
+        if (property != null) {
+            property.setTenant(null);
+        }
+        tenant.setProperty(null);
+        tenantRepository.delete(tenant);
+    }
+
     private TenantResponse mapToResponse(Tenant tenant) {
         return new TenantResponse(
                 tenant.getId(),

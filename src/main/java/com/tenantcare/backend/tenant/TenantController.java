@@ -24,4 +24,22 @@ public class TenantController {
         TenantResponse response = tenantService.createTenant(request, currentUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TenantResponse> getTenantById(
+            @PathVariable Long id,
+            @AuthenticationPrincipal User currentUser
+    ) {
+        TenantResponse response = tenantService.getTenantById(id, currentUser);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTenant(
+            @PathVariable Long id,
+            @AuthenticationPrincipal User currentUser
+    ) {
+        tenantService.deleteTenant(id, currentUser);
+        return ResponseEntity.noContent().build();
+    }
 }
